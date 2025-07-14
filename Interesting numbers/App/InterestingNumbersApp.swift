@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 @main
 struct InterestingNumbersApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .onAppear {
+                    WidgetCenter.shared.reloadTimelines(ofKind: "InterestingNumbersWidget")
+                }
         }
     }
 }

@@ -8,16 +8,65 @@
 
 /* Begin PBXBuildFile section */
 		225AA2472E21177C00186E16 /* NumbersCore in Frameworks */ = {isa = PBXBuildFile; productRef = 225AA2462E21177C00186E16 /* NumbersCore */; };
+		2271B1FD2E2573E600C4F9D0 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2271B1FC2E2573E600C4F9D0 /* WidgetKit.framework */; };
+		2271B1FF2E2573E600C4F9D0 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2271B1FE2E2573E600C4F9D0 /* SwiftUI.framework */; };
+		2271B2102E2573E800C4F9D0 /* InterestingNumbersWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2271B1FA2E2573E600C4F9D0 /* InterestingNumbersWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2271B2192E258CE500C4F9D0 /* NumbersCore in Frameworks */ = {isa = PBXBuildFile; productRef = 2271B2182E258CE500C4F9D0 /* NumbersCore */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2271B20E2E2573E800C4F9D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 224B293A2E1CE9D70027E50F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2271B1F92E2573E600C4F9D0;
+			remoteInfo = InterestingNumbersWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2271B2152E2573E800C4F9D0 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2271B2102E2573E800C4F9D0 /* InterestingNumbersWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		224B29422E1CE9D70027E50F /* Interesting numbers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Interesting numbers.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2271B1FA2E2573E600C4F9D0 /* InterestingNumbersWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = InterestingNumbersWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2271B1FC2E2573E600C4F9D0 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		2271B1FE2E2573E600C4F9D0 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		2271B2112E2573E800C4F9D0 /* Exceptions for "InterestingNumbersWidget" folder in "InterestingNumbersWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 2271B1F92E2573E600C4F9D0 /* InterestingNumbersWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		224B29442E1CE9D70027E50F /* Interesting numbers */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "Interesting numbers";
+			sourceTree = "<group>";
+		};
+		2271B2002E2573E600C4F9D0 /* InterestingNumbersWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				2271B2112E2573E800C4F9D0 /* Exceptions for "InterestingNumbersWidget" folder in "InterestingNumbersWidgetExtension" target */,
+			);
+			path = InterestingNumbersWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -31,6 +80,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2271B1F72E2573E600C4F9D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2271B1FF2E2573E600C4F9D0 /* SwiftUI.framework in Frameworks */,
+				2271B1FD2E2573E600C4F9D0 /* WidgetKit.framework in Frameworks */,
+				2271B2192E258CE500C4F9D0 /* NumbersCore in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -38,6 +97,8 @@
 			isa = PBXGroup;
 			children = (
 				224B29442E1CE9D70027E50F /* Interesting numbers */,
+				2271B2002E2573E600C4F9D0 /* InterestingNumbersWidget */,
+				2271B1FB2E2573E600C4F9D0 /* Frameworks */,
 				224B29432E1CE9D70027E50F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -46,8 +107,18 @@
 			isa = PBXGroup;
 			children = (
 				224B29422E1CE9D70027E50F /* Interesting numbers.app */,
+				2271B1FA2E2573E600C4F9D0 /* InterestingNumbersWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2271B1FB2E2573E600C4F9D0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2271B1FC2E2573E600C4F9D0 /* WidgetKit.framework */,
+				2271B1FE2E2573E600C4F9D0 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -60,10 +131,12 @@
 				224B293E2E1CE9D70027E50F /* Sources */,
 				224B293F2E1CE9D70027E50F /* Frameworks */,
 				224B29402E1CE9D70027E50F /* Resources */,
+				2271B2152E2573E800C4F9D0 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2271B20F2E2573E800C4F9D0 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				224B29442E1CE9D70027E50F /* Interesting numbers */,
@@ -76,6 +149,29 @@
 			productReference = 224B29422E1CE9D70027E50F /* Interesting numbers.app */;
 			productType = "com.apple.product-type.application";
 		};
+		2271B1F92E2573E600C4F9D0 /* InterestingNumbersWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2271B2122E2573E800C4F9D0 /* Build configuration list for PBXNativeTarget "InterestingNumbersWidgetExtension" */;
+			buildPhases = (
+				2271B1F62E2573E600C4F9D0 /* Sources */,
+				2271B1F72E2573E600C4F9D0 /* Frameworks */,
+				2271B1F82E2573E600C4F9D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2271B2002E2573E600C4F9D0 /* InterestingNumbersWidget */,
+			);
+			name = InterestingNumbersWidgetExtension;
+			packageProductDependencies = (
+				2271B2182E258CE500C4F9D0 /* NumbersCore */,
+			);
+			productName = InterestingNumbersWidgetExtension;
+			productReference = 2271B1FA2E2573E600C4F9D0 /* InterestingNumbersWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -87,6 +183,9 @@
 				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					224B29412E1CE9D70027E50F = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					2271B1F92E2573E600C4F9D0 = {
 						CreatedOnToolsVersion = 16.4;
 					};
 				};
@@ -109,12 +208,20 @@
 			projectRoot = "";
 			targets = (
 				224B29412E1CE9D70027E50F /* Interesting numbers */,
+				2271B1F92E2573E600C4F9D0 /* InterestingNumbersWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		224B29402E1CE9D70027E50F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2271B1F82E2573E600C4F9D0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -131,7 +238,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		2271B1F62E2573E600C4F9D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2271B20F2E2573E800C4F9D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2271B1F92E2573E600C4F9D0 /* InterestingNumbersWidgetExtension */;
+			targetProxy = 2271B20E2E2573E800C4F9D0 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		224B294B2E1CE9D90027E50F /* Debug */ = {
@@ -278,6 +400,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Solohub.Interesting-numbers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,6 +433,64 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Solohub.Interesting-numbers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2271B2132E2573E800C4F9D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4D98645N8M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = InterestingNumbersWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = InterestingNumbersWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Solohub.Interesting-numbers.InterestingNumbersWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2271B2142E2573E800C4F9D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4D98645N8M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = InterestingNumbersWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = InterestingNumbersWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Solohub.Interesting-numbers.InterestingNumbersWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -334,6 +518,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		2271B2122E2573E800C4F9D0 /* Build configuration list for PBXNativeTarget "InterestingNumbersWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2271B2132E2573E800C4F9D0 /* Debug */,
+				2271B2142E2573E800C4F9D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -349,6 +542,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		225AA2462E21177C00186E16 /* NumbersCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 225AA2452E21177C00186E16 /* XCRemoteSwiftPackageReference "NumbersCoreLibrary" */;
+			productName = NumbersCore;
+		};
+		2271B2182E258CE500C4F9D0 /* NumbersCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 225AA2452E21177C00186E16 /* XCRemoteSwiftPackageReference "NumbersCoreLibrary" */;
 			productName = NumbersCore;
