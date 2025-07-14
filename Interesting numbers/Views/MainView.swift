@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NumbersCore
 
 struct MainView: View {
     
@@ -14,12 +15,22 @@ struct MainView: View {
     @State private var rangeFrom: String = ""
     @State private var rangeTo: String = ""
     
+    @State private var showResultView = false
+    @State private var resultNumber: String = ""
+    @State private var resultFact: String = ""
+    
+    private let apiBuilder = APIBuilder()
+    private let apiManager = NumbersApiDataManager()
+    
     var body: some View {
         ZStack {
             Color.white.ignoresSafeArea()
             contentView
         }
         .hideKeyboardOnTap()
+        .fullScreenCover(isPresented: $showResultView) {
+            ShowResultInfoView(numberText: $resultNumber, factText: $resultFact)
+        }
     }
     
     private var contentView: some View {
@@ -35,7 +46,7 @@ struct MainView: View {
         .padding(.top, 30)
         .padding(.bottom, 50)
     }
-
+    
     // MARK: - UI components sections
     private var titleSection: some View {
         VStack(spacing: 24) {
@@ -65,7 +76,7 @@ struct MainView: View {
         HStack(alignment: .center) {
             ForEach(SearchMode.allCases) { mode in
                 createSearchModeButton(mode: mode)
-
+                
                 if mode != SearchMode.allCases.last {
                     Spacer()
                 }
@@ -97,7 +108,7 @@ struct MainView: View {
                 .font(.custom("OpenSans-Regular", size: 14))
                 .foregroundColor(.black)
                 .padding(.bottom, 4)
-
+            
             styledTextField(text: $inputText)
         }
         .onChange(of: inputText) {
@@ -112,7 +123,7 @@ struct MainView: View {
                 .font(.custom("OpenSans-Regular", size: 14))
                 .foregroundColor(.black)
                 .padding(.bottom, 4)
-
+            
             HStack(spacing: 20) {
                 styledTextField(placeholder: "From", text: $rangeFrom)
                 styledTextField(placeholder: "To", text: $rangeTo)
@@ -134,7 +145,7 @@ struct MainView: View {
                 .font(.custom("OpenSans-Regular", size: 14))
                 .foregroundColor(.black)
                 .padding(.bottom, 4)
-
+            
             styledTextField(text: $inputText)
         }
         .onChange(of: inputText) {
@@ -145,7 +156,7 @@ struct MainView: View {
     
     private var submitButton: some View {
         Button(action: {
-            print("Submit tapped with input: \(inputText)")
+            handleRequest()
         }) {
             Text("Display Fact")
                 .font(.custom("OpenSans-Semibold", size: 18))
@@ -190,9 +201,83 @@ struct MainView: View {
             .keyboardType(.decimalPad)
             .multilineTextAlignment(.center)
     }
+    
+    // MARK: - Actions helper methods
+    
+    private func handleRequest() {
+        switch selectedSearchMode {
+        case .userNumber:
+            handleUserNumberRequest()
+        case .randomNumber:
+            handleRandomNumberRequest()
+        case .numberInRange:
+            handleNumberInRangeRequest()
+        case .multipleNumbers:
+            handleMultipleNumbersRequest()
+        }
+    }
+    
+    private func processRequest(requestedNumber: String, displayNumber: String? = nil, type: NumberFactType) {
+        let urlString = apiBuilder.createLinkForRequest(type: type)
+        
+        apiManager.fetchFact(for: urlString) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let fact):
+                    self.resultNumber = displayNumber ?? requestedNumber
+                    self.resultFact = fact.trimmingCharacters(in: CharacterSet(charactersIn: "{}"))
+                    self.showResultView = true
+                case .failure:
+                    break
+                }
+            }
+        }
+    }
+    
+    private func handleUserNumberRequest() {
+        let cleaned = inputText.trimmingCharacters(in: .whitespaces)
+        guard !cleaned.isEmpty else { return }
+        
+        let cleanedNumber = apiBuilder.orderingRequestString(from: cleaned)
+        processRequest(requestedNumber: cleanedNumber, type: .trivia(requestedNumber: cleanedNumber))
+    }
+    
+    private func handleRandomNumberRequest() {
+        let randomNumber = Int.random(in: 0...999)
+        processRequest(requestedNumber: String(randomNumber), type: .trivia(requestedNumber: String(randomNumber)))
+    }
+    
+    private func handleNumberInRangeRequest() {
+        let fromText = rangeFrom.trimmingCharacters(in: .whitespaces)
+        let toText = rangeTo.trimmingCharacters(in: .whitespaces)
+
+        guard !fromText.isEmpty, !toText.isEmpty,
+              let from = Int(fromText), let to = Int(toText) else { return }
+
+        let minVal = min(from, to)
+        let maxVal = max(from, to)
+        
+        processRequest(requestedNumber: "\(minVal) - \(maxVal)", type: .range(min: "\(minVal)", max: "\(maxVal)"))
+    }
+    
+    private func handleMultipleNumbersRequest() {
+        let cleanedInput = inputText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !cleanedInput.isEmpty else { return }
+
+        let components = cleanedInput
+            .components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+            .filter { !$0.isEmpty && $0.allSatisfy(\.isNumber) }
+
+        guard !components.isEmpty else { return }
+
+        let requestString = components.joined(separator: ",")
+        let displayString = components.joined(separator: ", ")
+
+        processRequest(requestedNumber: requestString, displayNumber: displayString, type: .trivia(requestedNumber: requestString))
+    }
 }
 
 #Preview {
     MainView()
 }
-

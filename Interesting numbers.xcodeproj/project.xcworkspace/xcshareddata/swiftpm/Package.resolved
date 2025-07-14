@@ -1,0 +1,15 @@
+{
+  "originHash" : "c3a6fb463479391a0145cd7d7a7d706cd2fdd5adb8675e70a8ea2a5933224fe0",
+  "pins" : [
+    {
+      "identity" : "numberscorelibrary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/solohubivan/NumbersCoreLibrary",
+      "state" : {
+        "branch" : "main",
+        "revision" : "4f51f7da7d907c6d0b51ab0a8a8be7482252adbc"
+      }
+    }
+  ],
+  "version" : 3
+}
