@@ -15,10 +15,10 @@ enum SearchMode: Int, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .userNumber: return "User Number"
-        case .randomNumber: return "Random Number"
-        case .numberInRange: return "Number in a range"
-        case .multipleNumbers: return "Multiple numbers"
+        case .userNumber: return AppConstants.SearchModeButtonsTitles.userNumber
+        case .randomNumber: return AppConstants.SearchModeButtonsTitles.randomNumber
+        case .numberInRange: return AppConstants.SearchModeButtonsTitles.numberInRange
+        case .multipleNumbers: return AppConstants.SearchModeButtonsTitles.multipleNumbers
         }
     }
 }
