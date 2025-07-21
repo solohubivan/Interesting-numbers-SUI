@@ -22,23 +22,10 @@ enum AppConstants {
         static let dismissButtonIconImage: String = "closeLogo"
     }
     
-    enum ButtonsTitles {
-        static let displayFactBtnTxt: String = "Display Fact"
-    }
-    
     enum SearchModeButtonsTitles {
         static let userNumber: String = "User Number"
         static let randomNumber: String = "Random Number"
         static let numberInRange: String = "Number in a range"
         static let multipleNumbers: String = "Multiple numbers"
-    }
-    
-    enum MainViewConstants {
-        static let mainTitleLabelText: String = "Interesting Numbers"
-        static let describeTitleLabelText: String = "This App about facts of Numbers\nand Dates"
-        static let enterHereLabelTxt: String = "Enter here"
-        static let enterRangeLabelTxt: String = "Enter range"
-        static let fromPlaceholderText: String = "From"
-        static let toPlaceholderText: String = "To"
     }
 }

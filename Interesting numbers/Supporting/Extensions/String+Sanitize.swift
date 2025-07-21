@@ -10,9 +10,9 @@ import Foundation
 extension String {
     
     func sanitizedAsDigitsOnly(maxLength: Int = 10) -> String {
-            let filtered = self.filter { $0.isNumber }
-            return String(filtered.prefix(maxLength))
-        }
+        let filtered = self.filter { $0.isNumber }
+        return String(filtered.prefix(maxLength))
+    }
     
     func sanitizedAsMultipleInput() -> String {
         var filtered = ""
@@ -22,9 +22,8 @@ extension String {
             if char.isWholeNumber {
                 filtered.append(char)
                 hasSeparator = false
-            } else if (char == "," || char == ".") {
-                if i == 0 { continue }
-                if hasSeparator { continue }
+            } else if char == "," || char == "." {
+                guard i != 0, !hasSeparator else { continue }
                 filtered.append(",")
                 hasSeparator = true
             }

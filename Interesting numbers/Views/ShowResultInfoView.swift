@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ShowResultInfoView: View {
     
-    @ObservedObject var requestManager: UserRequestManager
+    @Bindable var requestManager: UserRequestManager
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
-            Color(hex: "#8033CC").ignoresSafeArea()
+            Color("PrimaryPurple").ignoresSafeArea()
             contentView
         }
     }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct MainView: View {
     
-    @StateObject private var requestManager = UserRequestManager()
+    @State private var requestManager = UserRequestManager()
+    @State private var viewModel = MainViewModel()
     
-    @State private var selectedSearchMode: SearchMode = .userNumber
     @State private var inputText: String = ""
     @State private var rangeFrom: String = ""
     @State private var rangeTo: String = ""
@@ -44,13 +44,13 @@ struct MainView: View {
 
     private var titleSection: some View {
         VStack(spacing: 24) {
-            Text(AppConstants.MainViewConstants.mainTitleLabelText)
+            Text(viewModel.mainTitleText)
                 .font(.custom(AppConstants.Fonts.openSansBold, size: 28))
-                .foregroundColor(Color(hex: "#2D2D2D"))
+                .foregroundColor(Color("NightRider"))
             
-            Text(AppConstants.MainViewConstants.describeTitleLabelText)
+            Text(viewModel.descriptionText)
                 .font(.custom(AppConstants.Fonts.openSansLight, size: 16))
-                .foregroundColor(Color(hex: "#2D2D2D"))
+                .foregroundColor(Color("NightRider"))
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
@@ -81,7 +81,7 @@ struct MainView: View {
 
     private var inputField: some View {
         Group {
-            switch selectedSearchMode {
+            switch viewModel.selectedSearchMode {
             case .userNumber:
                 singleInputField
             case .numberInRange:
@@ -97,34 +97,34 @@ struct MainView: View {
     
     private var singleInputField: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(AppConstants.MainViewConstants.enterHereLabelTxt)
+            Text(viewModel.enterHereLabelText)
                 .font(.custom(AppConstants.Fonts.openSansRegular, size: 14))
                 .foregroundColor(.black)
                 .padding(.bottom, 4)
             styledTextField(text: $inputText)
         }
         .onChange(of: inputText) {
-            guard selectedSearchMode == .userNumber else { return }
+            guard viewModel.selectedSearchMode == .userNumber else { return }
             inputText = inputText.sanitizedAsDigitsOnly()
         }
     }
 
     private var rangeInputFields: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(AppConstants.MainViewConstants.enterRangeLabelTxt)
+            Text(viewModel.enterRangeLabelText)
                 .font(.custom(AppConstants.Fonts.openSansRegular, size: 14))
                 .foregroundColor(.black)
                 .padding(.bottom, 4)
             HStack(spacing: 20) {
-                styledTextField(placeholder: AppConstants.MainViewConstants.fromPlaceholderText, text: $rangeFrom)
-                styledTextField(placeholder: AppConstants.MainViewConstants.toPlaceholderText, text: $rangeTo)
+                styledTextField(placeholder: viewModel.fromPlaceholderText, text: $rangeFrom)
+                styledTextField(placeholder: viewModel.toPlaceholderText, text: $rangeTo)
             }
             .onChange(of: rangeFrom) {
-                guard selectedSearchMode == .numberInRange else { return }
+                guard viewModel.selectedSearchMode == .numberInRange else { return }
                 rangeFrom = rangeFrom.sanitizedAsDigitsOnly()
             }
             .onChange(of: rangeTo) {
-                guard selectedSearchMode == .numberInRange else { return }
+                guard viewModel.selectedSearchMode == .numberInRange else { return }
                 rangeTo = rangeTo.sanitizedAsDigitsOnly()
             }
         }
@@ -132,56 +132,52 @@ struct MainView: View {
 
     private var multipleInputField: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text(AppConstants.MainViewConstants.enterHereLabelTxt)
+            Text(viewModel.enterHereLabelText)
                 .font(.custom(AppConstants.Fonts.openSansRegular, size: 14))
                 .foregroundColor(.black)
                 .padding(.bottom, 4)
             styledTextField(text: $inputText)
         }
         .onChange(of: inputText) {
-            guard selectedSearchMode == .multipleNumbers else { return }
+            guard viewModel.selectedSearchMode == .multipleNumbers else { return }
             inputText = inputText.sanitizedAsMultipleInput()
         }
     }
 
     private var submitButton: some View {
         Button(action: {
-            switch selectedSearchMode {
-            case .userNumber:
-                requestManager.handleUserNumber(inputText)
-            case .randomNumber:
-                requestManager.handleRandomNumber()
-            case .numberInRange:
-                requestManager.handleRange(rangeFrom, rangeTo)
-            case .multipleNumbers:
-                requestManager.handleMultipleNumbers(inputText)
-            }
+            viewModel.submitRequest(
+                inputText: inputText,
+                rangeFrom: rangeFrom,
+                rangeTo: rangeTo,
+                requestManager: requestManager
+            )
         }) {
-            Text(AppConstants.ButtonsTitles.displayFactBtnTxt)
+            Text(viewModel.displayFactButtonText)
                 .font(.custom(AppConstants.Fonts.openSansSemibold, size: 18))
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color(hex: "#8033CC"))
+                .background(Color("PrimaryPurple"))
                 .cornerRadius(5)
                 .frame(height: 52)
         }
         .padding(.horizontal, 16)
     }
-
+    
     // MARK: - Private helpers methods
     private func createSearchModeButton(mode: SearchMode) -> some View {
         Button(action: {
-            selectedSearchMode = mode
+            viewModel.selectedSearchMode = mode
             inputText = ""
         }) {
             Text(mode.title)
                 .font(.custom(AppConstants.Fonts.openSansSemibold, size: 13))
                 .frame(width: 75, height: 75)
-                .foregroundColor(selectedSearchMode == mode ? .white : Color(hex: "2D2D2D"))
-                .background(selectedSearchMode == mode ? Color(hex: "#8033CC") : Color(hex: "#FAF7FD"))
-                .border(selectedSearchMode == mode ? .clear : Color(hex: "#F5EFFB"), width: selectedSearchMode == mode ? 0 : 1)
-                .cornerRadius(selectedSearchMode == mode ? 9 : 6)
+                .foregroundColor(viewModel.selectedSearchMode == mode ? .white : Color("NightRider"))
+                .background(viewModel.selectedSearchMode == mode ? Color("PrimaryPurple") : Color("ObjectsBackgroundColor"))
+                .border(viewModel.selectedSearchMode == mode ? .clear : Color("ObjectsBorderColor"), width: viewModel.selectedSearchMode == mode ? 0 : 1)
+                .cornerRadius(viewModel.selectedSearchMode == mode ? 9 : 6)
                 .shadow(color: Color.black.opacity(0.2), radius: 3, y: 2)
                 .multilineTextAlignment(.center)
         }
@@ -193,10 +189,10 @@ struct MainView: View {
         TextField(placeholder, text: text)
             .padding()
             .frame(height: 44)
-            .background(Color(hex: "#FAF7FD"))
-            .border(Color(hex: "#F5EFFB"), width: 1)
+            .background(Color("ObjectsBackgroundColor"))
+            .border(Color("ObjectsBorderColor"), width: 1)
             .cornerRadius(5)
-            .foregroundColor(Color(hex: "2D2D2D"))
+            .foregroundColor(Color("NightRider"))
             .keyboardType(.decimalPad)
             .multilineTextAlignment(.center)
     }

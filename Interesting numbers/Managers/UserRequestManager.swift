@@ -7,12 +7,14 @@
 
 import Foundation
 import NumbersCore
+import Observation
 
-final class UserRequestManager: ObservableObject {
+@Observable
+final class UserRequestManager {
     
-    @Published var resultNumber: String = ""
-    @Published var resultFact: String = ""
-    @Published var showResultView: Bool = false
+    var resultNumber: String = ""
+    var resultFact: String = ""
+    var showResultView: Bool = false
 
     private let apiBuilder = APIBuilder()
     private let apiManager = NumbersApiDataManager()
@@ -50,7 +52,7 @@ final class UserRequestManager: ObservableObject {
         let components = cleanedInput
             .components(separatedBy: ",")
             .map { $0.trimmingCharacters(in: .whitespaces) }
-            .filter { !$0.isEmpty && $0.allSatisfy(\ .isNumber) }
+            .filter { !$0.isEmpty && $0.allSatisfy(\.isNumber) }
 
         guard !components.isEmpty else { return }
 
